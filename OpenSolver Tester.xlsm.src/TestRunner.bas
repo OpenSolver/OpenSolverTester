@@ -1,6 +1,10 @@
 Attribute VB_Name = "TestRunner"
 Option Explicit
 
+Sub LaunchForm()
+   TestSelector.Show
+End Sub
+
 ' Test Runner for testing sheet.
 ' All tests should have the testing column as Column A on the sheet. These cells control the
 ' parameters for testing each sheet. There are two types of test:
@@ -20,7 +24,7 @@ Sub RunAllTests()
     ' Get linear solvers
     Dim LinearSolvers As Collection
     Set LinearSolvers = New Collection
-    With Sheet53.ListBoxLinear
+    With TestSelector.lstLinearSolvers
         For ListCount = 0 To .ListCount - 1
             If .Selected(ListCount) Then
                 LinearSolvers.Add .List(ListCount)
@@ -31,7 +35,7 @@ Sub RunAllTests()
     ' Get non-linear solvers
     Dim NonLinearSolvers As Collection
     Set NonLinearSolvers = New Collection
-    With Sheet53.ListBoxNonLinear
+    With TestSelector.lstNonLinearSolvers
         For ListCount = 0 To .ListCount - 1
             If .Selected(ListCount) Then
                 NonLinearSolvers.Add .List(ListCount)
@@ -45,6 +49,7 @@ Sub RunAllTests()
     i = 0
     j = 0
     Sheets("Results").Cells.ClearContents
+    Sheets("Results").Cells(1, 3).Value = "Tests marked with * are expected to fail. Look at the test whitelist module for info on why they should fail"
     SetResultCell i, j, "Test"
     
     For Each Solver In LinearSolvers
@@ -58,7 +63,7 @@ Sub RunAllTests()
     
     
     Dim SheetName As String, listIndex As Integer
-    With Sheet53.ListBoxTest
+    With TestSelector.lstTests
         For listIndex = 0 To .ListCount - 1
             ' Exit if not selected
             If .Selected(listIndex) = False Then
@@ -73,7 +78,7 @@ Sub RunAllTests()
             Sheets(SheetName).Activate
             
             ' Read problem type and test the appropriate solvers for each test
-            ProblemType = Sheets(Sheet53.ListBoxTest.List(listIndex)).Cells(4, 1)
+            ProblemType = Sheets(.List(listIndex)).Cells(4, 1)
             For Each Solver In LinearSolvers
                 j = j + 1
                 If ProblemType = "Linear" Then
@@ -129,7 +134,7 @@ Function RunNonLinearityTest(Sheet As Worksheet, Solver As Variant)
 End Function
 
 Sub SetResultCell(i As Integer, j As Integer, Result As Variant)
-    Sheets("Results").Cells(1 + i, 2 + j).Value = Result
+    Sheets("Results").Cells(2 + i, 1 + j).Value = Result
 End Sub
 
 Function FormatResult(Result As Variant)
@@ -150,44 +155,4 @@ Function FormatResult(Result As Variant)
         FormatResult = Result
     End Select
 End Function
-
-Sub RefreshTestListBox()
-    With Sheet53.ListBoxTest
-        .Clear
-    
-        ' Loop through worksheets looking for sheets with the testing pane present.
-        Dim ws As Worksheet
-        For Each ws In ActiveWorkbook.Worksheets
-            ' Exit if not a testing sheet
-            If ws.Cells(2, 1).Value = "Normal" Or ws.Cells(2, 1).Value = "Custom" Then
-                .AddItem ws.Name
-            End If
-        Next ws
-        
-        ' Fix scrolling issue: https://stackoverflow.com/questions/5859459
-        .IntegralHeight = False
-        .Height = 250
-        .Width = Sheet53.Range("A17").Width - 20
-        .IntegralHeight = True
-        .MultiSelect = fmMultiSelectMulti
-        
-        .Enabled = True
-    End With
-    ' Decheck select all box
-    Sheet53.Shapes("CheckBoxTest").OLEFormat.Object.Value = -4146
-End Sub
-
-Sub SelectAll()
-    With Sheet53.ListBoxTest
-        If Sheet53.Shapes("CheckBoxTest").OLEFormat.Object.Value = 1 Then
-            Dim i As Integer
-            For i = 0 To .ListCount - 1
-                .Selected(i) = True
-            Next i
-            .Enabled = False
-        Else
-            .Enabled = True
-        End If
-    End With
-End Sub
 

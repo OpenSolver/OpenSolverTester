@@ -13,7 +13,7 @@ Function NormalTest(Sheet As Worksheet)
 End Function
 
 Function NormalTestWithoutReturnValidation(Sheet As Worksheet)
-' Checks OpenSolver code and sheet output are as expected.
+' Checks sheet output is as expected. Used for testing a solver that doesn't have return codes hooked up
     Dim SolveResult As Integer
     SolveResult = RunOpenSolver(False, True)
     Application.Calculate

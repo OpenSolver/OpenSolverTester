@@ -7,27 +7,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-Private Sub Workbook_Open()
-#If Win32 Then
-    Sheet53.ListBoxLinear.Height = 60
-    Sheet53.ListBoxLinear.Width = Sheet53.Range("A5").Width - 20
-    Sheet53.ListBoxLinear.Left = 10
-    Sheet53.ListBoxLinear.Top = Sheet53.Range("A5").Top
-    
-    Sheet53.ListBoxNonLinear.Height = 80
-    Sheet53.ListBoxNonLinear.Width = Sheet53.Range("A11").Width - 20
-    Sheet53.ListBoxNonLinear.Left = 10
-    Sheet53.ListBoxNonLinear.Top = Sheet53.Range("A11").Top
-        
-    Sheet53.ListBoxTest.Height = 250
-    Sheet53.ListBoxTest.Width = Sheet53.Range("A17").Width - 20
-    Sheet53.ListBoxTest.Left = 10
-    Sheet53.ListBoxTest.Top = Sheet53.Range("A17").Top
-    
-    RefreshTestListBox
-#End If
-End Sub
-
 '====================================================================
 ' Excel Code Exporter by Mike Woodhouse
 ' Released under MIT License at https://xlvbadevtools.codeplex.com/
