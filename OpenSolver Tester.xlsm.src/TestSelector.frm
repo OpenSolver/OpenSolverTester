@@ -1,9 +1,9 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} TestSelector 
    Caption         =   "Select tests to run"
-   ClientHeight    =   5060
+   ClientHeight    =   5055
    ClientLeft      =   0
-   ClientTop       =   -885
+   ClientTop       =   -1320
    ClientWidth     =   7065
    OleObjectBlob   =   "TestSelector.frx":0000
    StartUpPosition =   1  'CenterOwner
