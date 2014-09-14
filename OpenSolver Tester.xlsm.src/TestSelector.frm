@@ -47,6 +47,16 @@ Private Sub chkAllTests_Change()
 End Sub
 
 
+Private Sub cmdClear_Click()
+    Me.chkAllTests.Value = False
+    With Me.lstTests
+        Dim i As Long
+        For i = 0 To .ListCount - 1
+            .Selected(i) = False
+        Next i
+    End With
+End Sub
+
 Private Sub cmdRun_Click()
     Me.Hide
     RunAllTests
