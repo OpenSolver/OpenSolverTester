@@ -103,7 +103,7 @@ End Sub
 Function RunTest(Sheet As Worksheet, Solver As Variant, ReturnValidation As Boolean)
 ' Runs a test problem for a single solver
     Dim VBComp As Variant, SolveResult As Integer
-    Call SetNameOnSheet("OpenSolver_ChosenSolver", "=" & Solver)
+    OpenSolver.SetNameOnSheet "OpenSolver_ChosenSolver", "=" & Solver
     If Sheet.Cells(2, 1) = "Normal" Then
         If ReturnValidation = True Then
             RunTest = NormalTest.NormalTest(Sheet)
