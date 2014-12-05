@@ -74,7 +74,7 @@ Sub RunAllTests()
             SheetName = .List(listIndex)
             i = i + 1
             j = 0
-            SetResultCell i, j, SheetName
+            SetResultCell i, j, "=HYPERLINK(""[OpenSolver Tester.xlsm]" & SheetName & "!A1"", """ & SheetName & """)"
             Sheets(SheetName).Activate
             
             ' Read problem type and test the appropriate solvers for each test
