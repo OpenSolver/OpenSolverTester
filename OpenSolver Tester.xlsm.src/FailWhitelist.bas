@@ -7,31 +7,40 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' COUENNE
     ' ==================================
     
-    Case "Test3_Couenne"        ' Reports infeasible, bug with AMPL Couenne 0.4.7, older/NEOS versions work fine
+    Case "Test3_Couenne"        ' Reports infeasible, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
-    Case "Test4_Couenne"        ' Reports infeasible, bug with AMPL Couenne 0.4.7, older/NEOS versions work fine
+    Case "Test4_Couenne"        ' Reports infeasible, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
-    Case "Test9A_Couenne"       ' Reports optimal when problem is infeasible, bug with AMPL Couenne 0.4.7, older/NEOS versions work fine
+    Case "Test9A_Couenne"       ' Reports optimal when problem is infeasible, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
-    Case "Test15c_Couenne"      ' Incorrect optimal solution, bound on binary var is removed. Bug with AMPL Couenne 0.4.7, older/NEOS versions work fine
+    Case "Test15c_Couenne"      ' Incorrect optimal solution, bound on binary var is removed. Bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
-    Case "Test15d_Couenne"      ' Sometimes gets incorrect optimal solution, bound on binary var is removed. Bug with AMPL Couenne 0.4.7, older/NEOS versions work fine
+    Case "Test15d_Couenne"      ' Sometimes gets incorrect optimal solution, bound on binary var is removed. Bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
-    Case "Test22_Couenne"       ' Ignores lower bound, bug with AMPL Couenne 0.4.7, older/NEOS versions work fine
+    Case "Test22_Couenne"       ' Ignores lower bound, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
-    Case "Test23_Couenne"       ' Ignores lower bound, bug with AMPL Couenne 0.4.7, older/NEOS versions work fine
+    Case "Test23_Couenne"       ' Ignores lower bound, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
     Case "Test28_CBCOptions_Couenne"    ' Doesn't report unbounded solution
         TestShouldFail = True
         
-    Case "Test36_Couenne"       ' Couenne doesn't yet support MAX (0.4.7)
+    Case "Test35_Couenne"       ' Tolerance error, solving takes a long time
+        TestShouldFail = True
+        
+    Case "Test36_Couenne"       ' Couenne doesn't yet support MAX (0.5.1)
+        TestShouldFail = True
+        
+    Case "Test38_Couenne"       ' Tolerance error, solving takes a long time
+        TestShouldFail = True
+        
+    Case "Test41_Couenne"       ' Tolerance error, solving takes a long time
         TestShouldFail = True
         
     ' ==================================
@@ -45,7 +54,29 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' NOMAD
     ' ==================================
         
+    Case "Test11_NOMAD"                 ' Sometimes fails based on starting solution
+        TestShouldFail = True
+        
+        
+    Case "Test12_NOMAD"                 ' Sometimes fails based on starting solution
+        TestShouldFail = True
+        
+        
+    Case "Test13_NOMAD"                 ' Sometimes fails based on starting solution
+        TestShouldFail = True
+        
+        
+    Case "Test13b_NOMAD"                ' Sometimes fails based on starting solution
+        TestShouldFail = True
+        
+        
     Case "Test28_CBCOptions_NOMAD"      ' Reports large optimal solution rather than unbounded
+        TestShouldFail = True
+        
+    Case "Test35_NOMAD"                 ' Sometimes fails based on starting solution
+        TestShouldFail = True
+        
+    Case "Test39_SensNames_NOMAD"       ' Sometimes fails based on starting solution
         TestShouldFail = True
         
     ' ==================================
