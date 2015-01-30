@@ -38,9 +38,6 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' BONMIN
     ' ==================================
         
-    Case "Test28_CBCOptions_Bonmin"     ' Reports infeasible rather than unbounded
-        TestShouldFail = True
-        
     Case "Test41_Bonmin"        ' Bonmin can't solve this problem, reports unbounded. Same with NEOS Bonmin
         TestShouldFail = True
         
