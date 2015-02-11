@@ -7,12 +7,6 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' COUENNE
     ' ==================================
     
-    Case "Test3_Couenne"        ' Reports infeasible, bug with AMPL Couenne 0.5.1, NEOS versions work fine
-        TestShouldFail = True
-        
-    Case "Test4_Couenne"        ' Reports infeasible, bug with AMPL Couenne 0.5.1, NEOS versions work fine
-        TestShouldFail = True
-        
     Case "Test9A_Couenne"       ' Reports optimal when problem is infeasible, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
