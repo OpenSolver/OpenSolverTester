@@ -96,6 +96,7 @@ Sub RunAllTests(Optional Clear As Boolean = False)
                         SetResultCell RowBase + listIndex, j, FormatResult(RunNonLinearityTest(Sheets(SheetName), Solver))
                     End If
                 End If
+                DoEvents
             Next Solver
             
             For Each Solver In NonLinearSolvers
@@ -103,6 +104,7 @@ Sub RunAllTests(Optional Clear As Boolean = False)
                 If TestKeyExists(NonLinearSolversPresent, CStr(Solver)) Then
                     SetResultCell RowBase + listIndex, j, FormatResult(RunTest(Sheets(SheetName), Solver, True))
                 End If
+                DoEvents
             Next Solver
         
 NextSheet:
