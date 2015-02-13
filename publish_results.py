@@ -36,9 +36,12 @@ sum_sht = gc.open_by_key(SUMMARY_KEY)
 summary_sheet = sum_sht.worksheet('All Results')
 
 # Read in results
-linesep = '\n' if platform.system() == 'Windows' else '\r'
-results = pd.read_csv(filename, header=0, skiprows=1, na_values=[''],
-                      keep_default_na=False, lineterminator=linesep)
+if platform.system() == 'Windows':
+  results = pd.read_csv(filename, header=0, skiprows=1, na_values=[''],
+                      keep_default_na=False)
+else:
+  results = pd.read_csv(filename, header=0, skiprows=1, na_values=[''],
+                      keep_default_na=False, lineterminator='\r')
 results = results.dropna(axis=1, how='all')
 row_end = len(results) + 1
 col_end = len(results.columns)
