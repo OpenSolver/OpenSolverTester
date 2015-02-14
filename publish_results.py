@@ -14,7 +14,7 @@ def getofficestring(versionnumber):
   release = "Unknown"
   if versionnumber >= 15:
     release = "Office 2013"
-  elif versionnumber >= 14.4:
+  elif versionnumber >= 14.1:
     release = "Office 2011"
   elif versionnumber >= 14:
     release = "Office 2010"
