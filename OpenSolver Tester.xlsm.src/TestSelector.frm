@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} TestSelector 
    Caption         =   "Select tests to run"
-   ClientHeight    =   5060
+   ClientHeight    =   5055
    ClientLeft      =   0
    ClientTop       =   -2220
    ClientWidth     =   7065

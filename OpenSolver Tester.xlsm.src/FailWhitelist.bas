@@ -25,16 +25,7 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     Case "Test28_CBCOptions_Couenne"    ' Doesn't report unbounded solution
         TestShouldFail = True
         
-    Case "Test35_Couenne"       ' Tolerance error, solving takes a long time
-        TestShouldFail = True
-        
     Case "Test36_Couenne"       ' Couenne doesn't yet support MAX (0.5.1)
-        TestShouldFail = True
-        
-    Case "Test38_Couenne"       ' Tolerance error, solving takes a long time
-        TestShouldFail = True
-        
-    Case "Test41_Couenne"       ' Tolerance error, solving takes a long time
         TestShouldFail = True
         
     ' ==================================
