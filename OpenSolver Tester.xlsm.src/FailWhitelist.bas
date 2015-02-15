@@ -61,9 +61,6 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     Case "Test35_NOMAD"                 ' Sometimes fails based on starting solution
         TestShouldFail = True
         
-    Case "Test39_SensNames_NOMAD"       ' Sometimes fails based on starting solution
-        TestShouldFail = True
-        
     ' ==================================
     ' NEOS COUENNE
     ' ==================================
