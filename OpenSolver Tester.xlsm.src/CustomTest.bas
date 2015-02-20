@@ -1,4 +1,8 @@
 Attribute VB_Name = "CustomTest"
+Function Test15e_Relax(Sheet As Worksheet, Solver As Variant)
+    Test15e_Relax = NormalTest.NormalTest(Sheet, True)
+End Function
+
 Function Test24_IterativeCalc(Sheet As Worksheet, Solver As Variant)
     Application.Iteration = True
     Test24_IterativeCalc = NormalTest.NormalTest(Sheet)

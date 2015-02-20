@@ -1,8 +1,8 @@
 Attribute VB_Name = "NormalTest"
-Function NormalTest(Sheet As Worksheet)
+Function NormalTest(Sheet As Worksheet, Optional SolveRelaxation As Boolean = False)
 ' Checks OpenSolver code and sheet output are as expected.
     Dim SolveResult As Integer
-    SolveResult = RunOpenSolver(False, True)
+    SolveResult = RunOpenSolver(SolveRelaxation, True)
     Application.Calculate
     If SolveResult = Sheet.Range("A9").Value And _
        Sheet.Range("A6").Value = True Then
