@@ -1,6 +1,20 @@
 Attribute VB_Name = "CustomTest"
 Function Test15e_Relax(Sheet As Worksheet, Solver As Variant)
-    Test15e_Relax = NormalTest.NormalTest(Sheet, True)
+    'Test15e_Relax = NormalTest.NormalTest(Sheet, True)
+    SolveResult = RunOpenSolver(False, True)
+    If SolveResult <> OpenSolverResult.ErrorOccurred Then
+        Test15e_Relax = 0 ' FAIL
+        Exit Function
+    End If
+    
+    SolveResult = RunOpenSolver(True, True)
+    If SolveResult = OpenSolverResult.Optimal And _
+        Sheet.Range("A6").Value = True Then
+        Test15e_Relax = 1 ' PASS
+    Else
+        Test15e_Relax = 0 ' FAIL
+    End If
+
 End Function
 
 Function Test24_IterativeCalc(Sheet As Worksheet, Solver As Variant)
