@@ -76,7 +76,7 @@ Sub RunAllTests(Optional Clear As Boolean = False)
             ' Add test to results sheet
             SheetName = .List(listIndex)
             j = 0
-            SetResultCell RowBase + listIndex, j, "=HYPERLINK(""[OpenSolver Tester.xlsm]" & SheetName & "!A1"", """ & SheetName & """)"
+            SetResultCell RowBase + listIndex, j, "=HYPERLINK(""[OpenSolver Tester.xlsm]'" & SheetName & "'!A1"", """ & SheetName & """)"
             
             ' Exit if not selected
             If .Selected(listIndex) = False Then
