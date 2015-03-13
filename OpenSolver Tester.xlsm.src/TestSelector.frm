@@ -71,13 +71,13 @@ Sub RefreshSolvers()
     Dim Solver As Variant
     
     Me.lstLinearSolvers.Clear
-    For Each Solver In Sheets("Data").Range("LinearSolvers")
-        Me.lstLinearSolvers.AddItem CStr(Solver)
-    Next Solver
-    
     Me.lstNonLinearSolvers.Clear
-    For Each Solver In Sheets("Data").Range("NonLinearSolvers")
-        Me.lstNonLinearSolvers.AddItem CStr(Solver)
+    For Each Solver In OpenSolver.GetAvailableSolvers()
+        If OpenSolver.SolverType(CStr(Solver)) = OpenSolver.OpenSolver_SolverType.Linear Then
+            Me.lstLinearSolvers.AddItem CStr(Solver)
+        Else
+            Me.lstNonLinearSolvers.AddItem CStr(Solver)
+        End If
     Next Solver
 End Sub
 

@@ -124,7 +124,7 @@ Function RunTest(Sheet As Worksheet, Solver As Variant, ReturnValidation As Bool
     #End If
     
     Dim VBComp As Variant, SolveResult As Integer
-    OpenSolver.SetNameOnSheet "OpenSolver_ChosenSolver", "=" & Solver
+    OpenSolver.SetChosenSolver Solver, Sheet:=Sheet
     If Sheet.Cells(2, 1) = "Normal" Then
         If ReturnValidation = True Then
             RunTest = NormalTest.NormalTest(Sheet)
@@ -142,7 +142,7 @@ End Function
 
 Function RunNonLinearityTest(Sheet As Worksheet, Solver As Variant)
     Dim VBComp As Variant, SolveResult As Integer
-    Call SetNameOnSheet("OpenSolver_ChosenSolver", "=" & Solver)
+    SetChosenSolver Solver, Sheet:=Sheet
     If Sheet.Cells(2, 1) = "Normal" Then
         RunNonLinearityTest = NormalTest.NonLinearityTest(Sheet)
     Else

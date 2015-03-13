@@ -1,13 +1,13 @@
 Attribute VB_Name = "CustomTest"
 Function Test15e_Relax(Sheet As Worksheet, Solver As Variant)
     'Test15e_Relax = NormalTest.NormalTest(Sheet, True)
-    SolveResult = RunOpenSolver(False, True)
+    SolveResult = OpenSolver.RunOpenSolver(False, True)
     If SolveResult <> OpenSolverResult.ErrorOccurred Then
         Test15e_Relax = 0 ' FAIL
         Exit Function
     End If
     
-    SolveResult = RunOpenSolver(True, True)
+    SolveResult = OpenSolver.RunOpenSolver(True, True)
     If SolveResult = OpenSolverResult.Optimal And _
         Sheet.Range("A6").Value = True Then
         Test15e_Relax = 1 ' PASS
@@ -29,21 +29,21 @@ Function Test27_Parameters(Sheet As Worksheet, Solver As Variant)
         Exit Function
     End If
     
-    InitializeQuickSolve
+    OpenSolver.InitializeQuickSolve
     
     ' Test first set of values
     Dim SolveResult As Integer
     Dim CorrectResult1 As Boolean
     Sheet.Range("Scale").Value = -2
     Sheet.Range("Offset").Value = 4
-    SolveResult = RunQuickSolve(True)
+    SolveResult = OpenSolver.RunQuickSolve(True)
     CorrectResult1 = Sheet.Range("H16").Value And SolveResult = OpenSolverResult.Optimal
     
     ' Test second set of values
     Dim CorrectResult2 As Boolean
     Sheet.Range("Scale").Value = 2.5
     Sheet.Range("Offset").Value = -50
-    SolveResult = RunQuickSolve(True)
+    SolveResult = OpenSolver.RunQuickSolve(True)
     CorrectResult2 = Sheet.Range("H20").Value And SolveResult = OpenSolverResult.Optimal
     
     If CorrectResult1 And CorrectResult2 Then
@@ -55,7 +55,7 @@ End Function
 
 Function Test28_CBCOptions(Sheet As Worksheet, Solver As Variant)
     Dim SolveResult As Integer
-    SolveResult = RunOpenSolver(False, True)
+    SolveResult = OpenSolver.RunOpenSolver(False, True)
     
     ' Check CBC Options cause problem to solve correctly
     If Solver = "CBC" Then
@@ -79,7 +79,7 @@ Function Test40(Sheet As Worksheet, Solver As Variant)
     Dim SolveResult As Integer
     ' Reset decision var to 1 so non-linear solvers avoid an error
     Sheet.Range("D11").Value = 1
-    SolveResult = RunOpenSolver(False, True)
+    SolveResult = OpenSolver.RunOpenSolver(False, True)
     If SolverType(CStr(Solver)) = OpenSolver_SolverType.Linear Then
         ' Check linear solvers get an error in the objective cell
         If SolveResult = OpenSolverResult.ErrorOccurred Then
@@ -105,7 +105,7 @@ Function Test41(Sheet As Worksheet, Solver As Variant)
     Sheet.Range("G2").Value = 2
     Sheet.Range("H2").Value = 3
     Sheet.Range("I2").Value = 4
-    SolveResult = RunOpenSolver(False, True, 10)
+    SolveResult = OpenSolver.RunOpenSolver(False, True, 10)
     If SolverType(CStr(Solver)) = OpenSolver_SolverType.Linear Then
         ' Check linear solvers return NotLinear
         If SolveResult = OpenSolverResult.NotLinear Then

@@ -55,6 +55,14 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
         TestShouldFail = True
         
         
+    Case "Test15c_NOMAD"                ' Sometimes fails based on starting solution
+        TestShouldFail = True
+        
+        
+    Case "Test15d_NOMAD"                ' Sometimes fails based on starting solution
+        TestShouldFail = True
+        
+        
     Case "Test28_CBCOptions_NOMAD"      ' Reports large optimal solution rather than unbounded
         TestShouldFail = True
         
@@ -74,10 +82,7 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' ==================================
     ' NEOS BONMIN
     ' ==================================
-        
-    Case "Test40_NeosBon"       ' Crashes on "invalid number". Seems to be an AMPL > .nl conversion error, as our .nl version works fine
-        TestShouldFail = True
-        
+
     Case "Test41_NeosBon"       ' Bonmin can't solve this problem, reports unbounded. Same with local Bonmin
         TestShouldFail = True
         
