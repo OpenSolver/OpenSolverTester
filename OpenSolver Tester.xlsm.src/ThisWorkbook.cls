@@ -44,3 +44,26 @@ End Function
 ' Excel Code Exporter by Mike Woodhouse
 ' Released under MIT License at https://xlvbadevtools.codeplex.com/
 '====================================================================
+Private Sub Workbook_Open()
+    FixReferences
+End Sub
+
+Private Sub FixReferences()
+    Dim VBProj As VBIDE.VBProject, chkRef As VBIDE.Reference
+    Set VBProj = ThisWorkbook.VBProject
+    
+    ' Remove any OpenSolver reference
+    For Each chkRef In VBProj.References
+        ' Debug.Print chkRef.Name
+        If InStr(chkRef.Name, "OpenSolver") Then
+            VBProj.References.Remove chkRef
+        End If
+    Next chkRef
+    
+    ' Add the reference back
+    ' Assumes OpenSolver and OpenSolverTester folders are in the same root directory
+    VBProj.References.AddFromFile ThisWorkbook.Path & Application.PathSeparator & _
+                                  ".." & Application.PathSeparator & _
+                                  "OpenSolver" & Application.PathSeparator & _
+                                  "OpenSolver.xlam"
+End Sub
