@@ -1,1 +1,1 @@
-There is an issue with references where they will be missing on OS X if the file was last saved on Windows. To fix this, make sure that after saving on Windows and exporting the files that you fix the references on OS X and then save on that platform before committing. There are no issues with the references on either platform when the file is last saved on OS X.
+
