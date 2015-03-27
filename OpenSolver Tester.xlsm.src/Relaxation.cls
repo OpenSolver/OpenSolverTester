@@ -17,7 +17,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("H11:H13"), RelationGE, Me.Range("J11:J13")
     OpenSolver.AddConstraint Me.Range("D5:F5"), RelationGE, Me.Range("E7")
     OpenSolver.AddConstraint Me.Range("F5"), RelationBIN
-    OpenSolver.AddConstraint Me.Range("E5:F5"), RelationInt
+    OpenSolver.AddConstraint Me.Range("E5:F5"), RelationINT
     OpenSolver.SetChosenSolver Solver
     OpenSolver.SetIgnoreIntegerConstraints True
     OpenSolver.SetMaxIterations 2000

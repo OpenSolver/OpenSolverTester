@@ -38,7 +38,7 @@ Function Test(Solver As String) As TestResult
        Not FindConstraint(Me.Range("B17"), RelationGE, Me.Range("D17")) Or _
        Not FindConstraint(Me.Range("B20"), RelationLE, Me.Range("D20")) Or _
        Not FindConstraint(Me.Range("D33"), RelationGE, Me.Range("D35")) Or _
-       Not FindConstraint(Me.Range("B28:D28"), RelationInt) Then
+       Not FindConstraint(Me.Range("B28:D28"), RelationINT) Then
         Test = Fail
     End If
 

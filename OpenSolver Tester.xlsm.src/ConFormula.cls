@@ -18,7 +18,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("I11"), RelationGE, Me.Range("K11")
     OpenSolver.AddConstraint Me.Range("I12"), RelationLE, Me.Range("K12")
     OpenSolver.AddConstraint Me.Range("E5:F5"), RelationBIN
-    OpenSolver.AddConstraint Me.Range("D5:F5"), RelationInt
+    OpenSolver.AddConstraint Me.Range("D5:F5"), RelationINT
     OpenSolver.AddConstraint Me.Range("S4:S5"), RelationLE, Me.Range("U4:U5")
     OpenSolver.AddConstraint Me.Range("Q6:R6"), RelationGE, Me.Range("Q8:R8")
     OpenSolver.AddConstraint Me.Range("I10"), RelationGE, RHSFormula:="=$I$11/4+$B$3"

@@ -15,7 +15,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetDecisionVariables Me.Range("D4:F4")
     OpenSolver.SetObjectiveFunctionCell Me.Range("G6")
     OpenSolver.AddConstraint Me.Range("G8"), RelationLE, Me.Range("I8")
-    OpenSolver.AddConstraint Me.Range("D4:F4"), RelationInt
+    OpenSolver.AddConstraint Me.Range("D4:F4"), RelationINT
     OpenSolver.SetChosenSolver Solver
     OpenSolver.SetObjectiveSense MaximiseObjective
     
