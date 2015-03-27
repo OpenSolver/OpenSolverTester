@@ -1,5 +1,6 @@
 ### OpenSolver Specific
 secrets.py
+*.csv
 
 # Created by https://www.gitignore.io
 
