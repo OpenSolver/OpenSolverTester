@@ -1,15 +1,30 @@
 Attribute VB_Name = "TestRunner"
 Option Explicit
 
+Enum TestResult
+    Pass = 1
+    Fail = 0
+    NA = -1
+    WhitelistPass = 11
+    WhitelistFail = 10
+    WhitelistNA = 9
+End Enum
+
+Function MarkWhitelist(Result As TestResult) As TestResult
+    Select Case Result
+    Case Pass: MarkWhitelist = WhitelistPass
+    Case Fail: MarkWhitelist = WhitelistFail
+    Case NA:   MarkWhitelist = WhitelistNA
+    End Select
+End Function
+
 Sub LaunchForm()
    TestSelector.Show
 End Sub
 
 ' Test Runner for testing sheet.
 ' All tests should have the testing column as Column A on the sheet. These cells control the
-' parameters for testing each sheet. There are two types of test:
-'     - Normal, which is tested by the NormalTest.NormalTest function
-'     - Custom, which is tested by a sheet-specific function called CustomTest.<SheetName>
+' parameters for testing each sheet.
 '
 ' Model Type determines which solvers are tested on the problem - linear solvers are only tested on
 ' linear problems, while non-linear solvers are tested on all problems.
@@ -19,32 +34,26 @@ End Sub
 '     - ExpectedResult, specifies the OpenSolver code that should be returned.
 
 Sub RunAllTests(Optional Clear As Boolean = False)
+    Application.Calculation = xlCalculationManual
+    
     Dim ListCount As Integer
     
     ' Get linear solvers
-    Dim LinearSolvers As Collection
-    Set LinearSolvers = New Collection
-    Dim LinearSolversPresent As Collection
-    Set LinearSolversPresent = New Collection
+    Dim SolversPresent As Collection
+    Set SolversPresent = New Collection
     With TestSelector.lstLinearSolvers
         For ListCount = 0 To .ListCount - 1
-            LinearSolvers.Add .List(ListCount)
             If .Selected(ListCount) Then
-                LinearSolversPresent.Add .List(ListCount), CStr(.List(ListCount))
+                SolversPresent.Add .List(ListCount), CStr(.List(ListCount))
             End If
         Next ListCount
     End With
 
     ' Get non-linear solvers
-    Dim NonLinearSolvers As Collection
-    Set NonLinearSolvers = New Collection
-    Dim NonLinearSolversPresent As Collection
-    Set NonLinearSolversPresent = New Collection
     With TestSelector.lstNonLinearSolvers
         For ListCount = 0 To .ListCount - 1
-            NonLinearSolvers.Add .List(ListCount)
             If .Selected(ListCount) Then
-                NonLinearSolversPresent.Add .List(ListCount), CStr(.List(ListCount))
+                SolversPresent.Add .List(ListCount), CStr(.List(ListCount))
             End If
         Next ListCount
     End With
@@ -60,15 +69,10 @@ Sub RunAllTests(Optional Clear As Boolean = False)
     Sheets("Results").Cells(1, 3).Value = "Tests marked with * are expected to fail. Look at the test whitelist module for info on why they should fail"
     SetResultCell 1, j, "Test"
     
-    For Each Solver In LinearSolvers
+    For Each Solver In OpenSolver.GetAvailableSolvers
         j = j + 1
         SetResultCell 1, j, Solver
     Next Solver
-    For Each Solver In NonLinearSolvers
-        j = j + 1
-        SetResultCell 1, j, Solver
-    Next Solver
-    
     
     Dim SheetName As String, listIndex As Integer
     With TestSelector.lstTests
@@ -87,22 +91,10 @@ Sub RunAllTests(Optional Clear As Boolean = False)
             
             ' Read problem type and test the appropriate solvers for each test
             ProblemType = Sheets(.List(listIndex)).Cells(4, 1)
-            For Each Solver In LinearSolvers
+            For Each Solver In OpenSolver.GetAvailableSolvers
                 j = j + 1
-                If TestKeyExists(LinearSolversPresent, CStr(Solver)) Then
-                    If ProblemType = "Linear" Then
-                        SetResultCell RowBase + listIndex, j, FormatResult(RunTest(Sheets(SheetName), Solver, True))
-                    Else
-                        SetResultCell RowBase + listIndex, j, FormatResult(RunNonLinearityTest(Sheets(SheetName), Solver))
-                    End If
-                End If
-                DoEvents
-            Next Solver
-            
-            For Each Solver In NonLinearSolvers
-                j = j + 1
-                If TestKeyExists(NonLinearSolversPresent, CStr(Solver)) Then
-                    SetResultCell RowBase + listIndex, j, FormatResult(RunTest(Sheets(SheetName), Solver, True))
+                If TestKeyExists(SolversPresent, CStr(Solver)) Then
+                    SetResultCell RowBase + listIndex, j, FormatResult(ApiTest(SheetName, CStr(Solver)), CStr(Solver), Sheets(SheetName))
                 End If
                 DoEvents
             Next Solver
@@ -110,47 +102,15 @@ Sub RunAllTests(Optional Clear As Boolean = False)
 NextSheet:
         Next listIndex
     End With
-    
+    Application.Calculation = xlCalculationAutomatic
     Sheets("Results").Activate
 End Sub
 
-Function RunTest(Sheet As Worksheet, Solver As Variant, ReturnValidation As Boolean)
-' Runs a test problem for a single solver
-    #If Mac Then
-        If Solver = "NOMAD" Then
-            RunTest = -1
-            Exit Function
-        End If
-    #End If
-    
-    Dim VBComp As Variant, SolveResult As Integer
-    OpenSolver.SetChosenSolver CStr(Solver), Sheet:=Sheet
-    If Sheet.Cells(2, 1) = "Normal" Then
-        If ReturnValidation = True Then
-            RunTest = NormalTest.NormalTest(Sheet)
-        Else
-            RunTest = NormalTest.NormalTestWithoutReturnValidation(Sheet)
-        End If
+Function RunTest(sheet As Worksheet, Solver As String, Optional SolveRelaxation As Boolean = False) As TestResult
+    If sheet.Range("A4") = "Non-linear" And SolverType(Solver) = OpenSolver_SolverType.Linear Then
+        RunTest = NormalTest.NonLinearityTest(sheet)
     Else
-        RunTest = Application.Run(Sheet.Name, Sheet, Solver)
-    End If
-    
-    If TestShouldFail(Sheet.Name, CStr(Solver)) Then
-        RunTest = RunTest + 10
-    End If
-End Function
-
-Function RunNonLinearityTest(Sheet As Worksheet, Solver As Variant)
-    Dim VBComp As Variant, SolveResult As Integer
-    SetChosenSolver CStr(Solver), Sheet:=Sheet
-    If Sheet.Cells(2, 1) = "Normal" Then
-        RunNonLinearityTest = NormalTest.NonLinearityTest(Sheet)
-    Else
-        RunNonLinearityTest = Application.Run(Sheet.Name, Sheet, Solver)
-    End If
-    
-    If TestShouldFail(Sheet.Name, CStr(Solver)) Then
-        RunNonLinearityTest = RunNonLinearityTest + 10
+        RunTest = NormalTest.NormalTest(sheet, SolveRelaxation)
     End If
 End Function
 
@@ -158,22 +118,18 @@ Sub SetResultCell(i As Integer, j As Integer, Result As Variant)
     Sheets("Results").Cells(1 + i, 1 + j).Value = Result
 End Sub
 
-Function FormatResult(Result As Variant)
+Function FormatResult(Result As TestResult, Solver As String, sheet As Worksheet)
+    If TestShouldFail(sheet.Name, Solver) Then
+        Result = MarkWhitelist(Result)
+    End If
+    
     Select Case Result
-    Case 1
-        FormatResult = "PASS"
-    Case 11 ' a passing test on the fail whitelist
-        FormatResult = "PASS*"
-    Case 0
-        FormatResult = "FAIL"
-    Case 10 ' a failing test on the fail whitelist
-        FormatResult = "FAIL*"
-    Case -1
-        FormatResult = "NA"
-    Case 9 ' an N/A test on the fail whitelist
-        FormatResult = "NA*"
-    Case Else
-        FormatResult = Result
+    Case Pass:            FormatResult = "PASS"
+    Case WhitelistPass:   FormatResult = "PASS*"
+    Case Fail:            FormatResult = "FAIL"
+    Case WhitelistFail:   FormatResult = "FAIL*"
+    Case NA, WhitelistNA: FormatResult = "NA"
+    Case Else:            FormatResult = Result
     End Select
 End Function
 

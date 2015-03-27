@@ -54,7 +54,7 @@ Application.DisplayAlerts = True
 
 Dim ScriptPath As String
 ScriptPath = ThisWorkbook.Path & Application.PathSeparator & "publish_results.py"
-RunExternalCommand "python " & MakePathSafe(ScriptPath) & " " & MakePathSafe(CSVPath), "", SW_SHOWNORMAL, True
+RunExternalCommand "python " & MakePathSafe(ScriptPath) & " " & MakePathSafe(CSVPath), "", Hide, True
 
 Kill CSVPath
 Application.ScreenUpdating = True

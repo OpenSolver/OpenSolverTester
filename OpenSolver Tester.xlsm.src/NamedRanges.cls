@@ -1,0 +1,25 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "NamedRanges"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Option Explicit
+
+Function Test(Solver As String) As TestResult
+    Me.Activate
+    OpenSolver.ResetModel
+    OpenSolver.SetDecisionVariables Me.Range("D4:H4")
+    OpenSolver.SetObjectiveFunctionCell Me.Range("I6")
+    OpenSolver.AddConstraint Me.Range("myNamedRange"), RelationLE, Me.Range("K8")
+    OpenSolver.AddConstraint Me.Range("I9"), RelationGE, Me.Range("K9")
+    OpenSolver.AddConstraint Me.Range("I10:I11"), RelationLE, Me.Range("K10:K11")
+    OpenSolver.AddConstraint Me.Range("I12"), RelationEQ, Me.Range("K12")
+    OpenSolver.SetChosenSolver Solver
+    OpenSolver.SetMaxIterations 2000
+    
+    Test = RunTest(Me, Solver)
+End Function
