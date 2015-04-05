@@ -12,7 +12,7 @@ Option Explicit
 Function Test(Solver As String) As TestResult
     Me.Activate
     OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Union(Me.Range("D4:G4"), Me.Range("Q3:R4"), Me.Range("N3:N4"))
+    OpenSolver.SetDecisionVariables Me.Range("D4:G4,Q3:R4,N3:N4")
     OpenSolver.SetObjectiveFunctionCell Me.Range("I6")
     OpenSolver.AddConstraint Me.Range("I8:I9"), RelationLE, Me.Range("K8:K9")
     OpenSolver.AddConstraint Me.Range("I10"), RelationGE, Me.Range("K10")

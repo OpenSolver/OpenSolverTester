@@ -24,7 +24,7 @@ Function Test(Solver As String) As TestResult
     
     ' Check decision vars
     Dim Intersection As Range
-    Set Intersection = Intersect(OpenSolver.GetDecisionVariables, Union(Me.Range("C3:C5"), Me.Range("B28:D28")))
+    Set Intersection = Intersect(OpenSolver.GetDecisionVariables, Me.Range("C3:C5,B28:D28"))
     If Intersection Is Nothing Then
         Test = Fail
         Exit Function
