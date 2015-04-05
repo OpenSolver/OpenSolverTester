@@ -20,7 +20,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("E5:F5"), RelationINT
     OpenSolver.SetChosenSolver Solver
     OpenSolver.SetIgnoreIntegerConstraints True
-    OpenSolver.SetMaxIterations 2000
     
     Dim SolveResult As OpenSolverResult
     SolveResult = OpenSolver.RunOpenSolver(False, True)

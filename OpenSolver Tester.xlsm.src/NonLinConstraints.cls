@@ -16,7 +16,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetObjectiveFunctionCell Me.Range("I6")
     OpenSolver.AddConstraint Me.Range("I7:I9"), RelationLE, Me.Range("K7:K9")
     OpenSolver.SetChosenSolver Solver
-    OpenSolver.SetMaxIterations 2000
     
     Test = RunTest(Me, Solver)
 End Function

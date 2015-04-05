@@ -19,7 +19,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("F12:F18"), RelationLE, Me.Range("H12:H18")
     OpenSolver.SetChosenSolver Solver
     OpenSolver.SetObjectiveSense MaximiseObjective
-    OpenSolver.SetMaxIterations 2000
     
     Test = RunTest(Me, Solver)
 End Function

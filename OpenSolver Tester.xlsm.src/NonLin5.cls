@@ -13,7 +13,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetDecisionVariables Me.Range("F2:I2")
     OpenSolver.SetObjectiveFunctionCell Me.Range("J7")
     OpenSolver.SetChosenSolver Solver
-    OpenSolver.SetMaxIterations 20000
     
     ' Reset decision vars so non-linear solvers avoid an evaluating sqrt(0)
     Me.Range("F2").Value = 1

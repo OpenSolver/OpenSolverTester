@@ -17,7 +17,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("S10:S11"), RelationGE, Me.Range("Q10:Q11")
     OpenSolver.AddConstraint Me.Range("S10:S11"), RelationLE, Me.Range("U10:U11")
     OpenSolver.SetChosenSolver Solver
-    OpenSolver.SetMaxIterations 2000
     
     Test = RunTest(Me, Solver)
 End Function

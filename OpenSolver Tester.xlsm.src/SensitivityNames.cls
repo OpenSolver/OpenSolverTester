@@ -20,7 +20,6 @@ Function Test(Solver As String) As TestResult
     
     OpenSolver.SetDualsNewSheet True
     OpenSolver.SetUpdateSensitivity True
-    OpenSolver.SetMaxIterations 2000
     
     Test = RunTest(Me, Solver)
     Test = TestSensitivity(Test, Solver)

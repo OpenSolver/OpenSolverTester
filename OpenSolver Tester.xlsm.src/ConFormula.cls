@@ -23,7 +23,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("Q6:R6"), RelationGE, Me.Range("Q8:R8")
     OpenSolver.AddConstraint Me.Range("I10"), RelationGE, RHSFormula:="=$I$11/4+$B$3"
     OpenSolver.SetChosenSolver Solver
-    OpenSolver.SetMaxIterations 2000
         
     Test = RunTest(Me, Solver)
 End Function

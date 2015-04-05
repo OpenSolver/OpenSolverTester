@@ -13,7 +13,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetDecisionVariables Me.Range("D11")
     OpenSolver.SetObjectiveFunctionCell Me.Range("D16")
     OpenSolver.SetChosenSolver Solver
-    OpenSolver.SetMaxIterations 2000
     
     ' Avoid error on zero in cell
     Me.Range("D11").Value = 1

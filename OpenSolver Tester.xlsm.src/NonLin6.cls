@@ -13,7 +13,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetDecisionVariables Me.Range("D7:D8")
     OpenSolver.SetObjectiveFunctionCell Me.Range("F15")
     OpenSolver.SetChosenSolver Solver
-    OpenSolver.SetMaxIterations 2000
     
     ' Starting point 1
     Me.Range("D7").Value = -30

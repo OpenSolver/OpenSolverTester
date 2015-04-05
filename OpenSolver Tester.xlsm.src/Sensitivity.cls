@@ -21,7 +21,6 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetObjectiveSense MaximiseObjective
     OpenSolver.SetDualsNewSheet True
     OpenSolver.SetUpdateSensitivity True
-    OpenSolver.SetMaxIterations 2000
     
     Test = RunTest(Me, Solver)
     If SolverHasSensitivityAnalysis(Solver) Then
