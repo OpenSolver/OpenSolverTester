@@ -22,7 +22,7 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     Case "VarConstraintLB_Couenne"       ' Ignores lower bound, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
-    Case "SolverParameters_Couenne"    ' Doesn't report unbounded solution
+    Case "Unbounded_Couenne"     ' Reports large optimal solution rather than unbounded
         TestShouldFail = True
         
     Case "NonLinMinMax_Couenne"       ' Couenne doesn't yet support MAX (0.5.1)
@@ -31,9 +31,6 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' ==================================
     ' BONMIN
     ' ==================================
-        
-    Case "SolverParameters_Bonmin"        ' Reports infeasible rather than unbounded (random based on starting point)
-        TestShouldFail = True
         
     Case "NonLin6_Bonmin"        ' Bonmin can't solve this problem from the given starting points
         TestShouldFail = True
@@ -51,7 +48,7 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     Case "SensitivityNames_NOMAD"  ' Sometimes fails based on starting solution
         TestShouldFail = True
         
-    Case "SolverParameters_NOMAD"  ' Reports large optimal solution rather than unbounded
+    Case "Unbounded_NOMAD"  ' Reports large optimal solution rather than unbounded
         TestShouldFail = True
         
     Case "NonLin6_NOMAD"  ' Sometimes fails based on starting solution
@@ -60,10 +57,10 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' ==================================
     ' NEOS COUENNE
     ' ==================================
-        
-    Case "SolverParameters_NeosCou"     ' Reports large optimal solution rather than unbounded
+    
+    Case "Unbounded_NeosCou"     ' Reports large optimal solution rather than unbounded
         TestShouldFail = True
-        
+
     Case "NonLinMinMax_NeosCou"       ' Couenne doesn't yet support MAX (0.4.7)
         TestShouldFail = True
         

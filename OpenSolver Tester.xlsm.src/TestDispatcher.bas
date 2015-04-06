@@ -35,6 +35,7 @@ Function ApiTest(SheetName As String, Solver As String) As TestResult
     Case "DeletedObjRef":               ApiTest = DeletedObjRef.Test(Solver)
     Case "InfConstConstraint":          ApiTest = InfConstConstraint.Test(Solver)
     Case "FeasConstConstraint":         ApiTest = FeasConstConstraint.Test(Solver)
+    Case "Unbounded":                   ApiTest = Unbounded.Test(Solver)
     Case "ProtectedSheet":              ApiTest = ProtectedSheet.Test(Solver)
     Case "NonLin":                      ApiTest = NonLin.Test(Solver)
     Case "NonLinObj":                   ApiTest = NonLinObj.Test(Solver)
