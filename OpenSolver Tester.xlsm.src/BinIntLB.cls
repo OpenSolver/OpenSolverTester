@@ -20,6 +20,9 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("E5:F5"), RelationINT
     OpenSolver.SetChosenSolver Solver
     
+    ' Reset value of binary to valid
+    Me.Range("F5").Value = 0
+    
     Test = RunTest(Me, Solver)
 End Function
 

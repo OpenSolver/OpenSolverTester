@@ -21,6 +21,9 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetDualsNewSheet True
     OpenSolver.SetUpdateSensitivity True
     
+    ' NOMAD is sensitive on this problem, so we give it a bigger tolerance
+    OpenSolver.SetPrecision 0.0001
+    
     Test = RunTest(Me, Solver)
     Test = TestSensitivity(Test, Solver)
     

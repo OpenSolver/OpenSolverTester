@@ -39,15 +39,6 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' NOMAD
     ' ==================================
         
-    Case "BinLB_NOMAD"  ' Sometimes fails based on starting solution
-        TestShouldFail = True
-        
-    Case "BinIntLB_NOMAD"  ' Sometimes fails based on starting solution
-        TestShouldFail = True
-        
-    Case "SensitivityNames_NOMAD"  ' Sometimes fails based on starting solution
-        TestShouldFail = True
-        
     Case "Unbounded_NOMAD"  ' Reports large optimal solution rather than unbounded
         TestShouldFail = True
         
