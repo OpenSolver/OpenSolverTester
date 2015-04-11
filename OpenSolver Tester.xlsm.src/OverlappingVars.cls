@@ -12,7 +12,10 @@ Option Explicit
 Function Test(Solver As String) As TestResult
     Me.Activate
     OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Me.Range("D4:E4,E4:F4")
+    
+    ' Hack for NOMAD range issues in non-english locales. See TestRunner for info
+    OpenSolver.SetDecisionVariables Me.Range("D4:E4" & Separator & "E4:F4")
+    
     OpenSolver.SetObjectiveFunctionCell Me.Range("H6")
     OpenSolver.AddConstraint Me.Range("H8:H9"), RelationLE, Me.Range("J8:J9")
     OpenSolver.AddConstraint Me.Range("H10"), RelationGE, Me.Range("J10")

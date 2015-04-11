@@ -1,6 +1,8 @@
 Attribute VB_Name = "TestRunner"
 Option Explicit
 
+Public Separator As String
+
 Enum TestResult
     Pass = 1
     Fail = 0
@@ -73,6 +75,15 @@ Sub RunAllTests(Optional Clear As Boolean = False)
         j = j + 1
         SetResultCell 1, j, Solver
     Next Solver
+    
+    ' Hack for NOMAD. We need to use ";" as the range separator if in non-english locale and using NOMAD in some of the tests
+    ' In non-english locales the Range method fails if:
+    ' 1.  The solver is NOMAD
+    ' 2.  This is not the first test
+    ' 3a. The argument to Range() is a multi-area range in English locale (which usually works)
+    ' 3b. The argument to Range() is anything but a single string ("text & separator & text" works, but functions seem to fail)
+    ' 4.  There have been no break points set before reaching this test. If any breaks occur, everything is fine
+    Separator = IIf(TestKeyExists(SolversPresent, "NOMAD"), Application.International(xlListSeparator), ",")
     
     Dim SheetName As String, listIndex As Integer
     With TestSelector.lstTests

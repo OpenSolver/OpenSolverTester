@@ -20,6 +20,9 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetChosenSolver Solver
     OpenSolver.SetObjectiveSense MaximiseObjective
     
+    ' Sometimes previous solution marked infeasible
+    OpenSolver.SetPrecision 0.001
+    
     Test = RunTest(Me, Solver)
 End Function
 
