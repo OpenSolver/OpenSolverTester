@@ -20,7 +20,17 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetChosenSolver Solver
     
     Application.Iteration = True
+    
+    ' Create a circular reference
+    Me.Range("M9").Formula = "$N$9+1"
+    Me.Range("N9").Formula = "$M$9+1"
+    
     Test = RunTest(Me, Solver)
+    
+    'Delete circular reference
+    Me.Range("M9").Clear
+    Me.Range("N9").Clear
+    
     Application.Iteration = False
 End Function
 
