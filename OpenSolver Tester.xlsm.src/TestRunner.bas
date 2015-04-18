@@ -118,7 +118,7 @@ NextSheet:
 End Sub
 
 Function RunTest(sheet As Worksheet, Solver As String, Optional SolveRelaxation As Boolean = False) As TestResult
-    If sheet.Range("A4") = "Non-linear" And SolverType(Solver) = OpenSolver_SolverType.Linear Then
+    If sheet.Range("A4") = "Non-linear" And SolverLinearity(OpenSolver.CreateSolver(Solver)) = OpenSolver_SolverType.Linear Then
         RunTest = NormalTest.NonLinearityTest(sheet)
     Else
         RunTest = NormalTest.NormalTest(sheet, SolveRelaxation)

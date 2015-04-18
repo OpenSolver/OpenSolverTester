@@ -19,7 +19,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetChosenSolver Solver
     
     
-    If SolverType(Solver) <> OpenSolver_SolverType.Linear Then
+    If SolverLinearity(OpenSolver.CreateSolver(Solver)) <> OpenSolver_SolverType.Linear Then
         Test = NA
         Exit Function
     End If

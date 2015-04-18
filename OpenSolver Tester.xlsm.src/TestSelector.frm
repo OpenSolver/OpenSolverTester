@@ -68,16 +68,17 @@ Private Sub UserForm_Initialize()
 End Sub
 
 Sub RefreshSolvers()
-    Dim Solver As Variant
+    Dim SolverShortName As Variant, Solver As Object
     
     Me.lstLinearSolvers.Clear
     Me.lstNonLinearSolvers.Clear
-    For Each Solver In OpenSolver.GetAvailableSolvers()
-        If OpenSolver.SolverType(CStr(Solver)) = OpenSolver.OpenSolver_SolverType.Linear Then
-            Me.lstLinearSolvers.AddItem CStr(Solver)
+    For Each SolverShortName In OpenSolver.GetAvailableSolvers()
+        Set Solver = OpenSolver.CreateSolver(CStr(SolverShortName))
+        If SolverLinearity(Solver) = OpenSolver.OpenSolver_SolverType.Linear Then
+            Me.lstLinearSolvers.AddItem Solver.ShortName
         Else
-            Me.lstNonLinearSolvers.AddItem CStr(Solver)
+            Me.lstNonLinearSolvers.AddItem Solver.ShortName
         End If
-    Next Solver
+    Next SolverShortName
 End Sub
 

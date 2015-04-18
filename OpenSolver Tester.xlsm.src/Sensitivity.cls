@@ -23,7 +23,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetUpdateSensitivity True
     
     Test = RunTest(Me, Solver)
-    If SolverHasSensitivityAnalysis(Solver) Then
+    If SensitivityAnalysisAvailable(CreateSolver(Solver)) Then
         Dim SensitivitySheet As Worksheet
         On Error GoTo ErrorHandler
         Set SensitivitySheet = Sheets(Me.Name & " Sensitivity")

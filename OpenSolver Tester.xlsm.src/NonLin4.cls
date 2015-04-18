@@ -7,6 +7,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+Option Explicit
+
 Function Test(Solver As String) As TestResult
     Me.Activate
     OpenSolver.ResetModel
@@ -17,7 +19,7 @@ Function Test(Solver As String) As TestResult
     ' Avoid error on zero in cell
     Me.Range("D11").Value = 1
     
-    If SolverType(Solver) = OpenSolver_SolverType.Linear Then
+    If SolverLinearity(OpenSolver.CreateSolver(Solver)) = OpenSolver_SolverType.Linear Then
         Test = IIf(OpenSolver.RunOpenSolver(False, True) = ErrorOccurred, Pass, Fail)
     Else
         Test = RunTest(Me, Solver)
