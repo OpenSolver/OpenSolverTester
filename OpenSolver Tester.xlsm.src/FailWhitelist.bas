@@ -19,6 +19,9 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     Case "FormulaLB_Couenne"       ' Ignores lower bound, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
+    Case "SolverParameters_Couenne"       ' Error message on invalid option value is not redirected to log
+        TestShouldFail = True
+        
     Case "VarConstraintLB_Couenne"       ' Ignores lower bound, bug with AMPL Couenne 0.5.1, NEOS versions work fine
         TestShouldFail = True
         
