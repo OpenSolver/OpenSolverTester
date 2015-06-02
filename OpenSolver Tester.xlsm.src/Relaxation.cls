@@ -23,7 +23,7 @@ Function Test(Solver As String) As TestResult
     
     Dim SolveResult As OpenSolverResult
     SolveResult = OpenSolver.RunOpenSolver(False, True)
-    If SolveResult <> OpenSolverResult.ErrorOccurred Then
+    If SolveResult <> OpenSolverResult.AbortedThruUserAction Then
         Test = Fail
         Exit Function
     End If
