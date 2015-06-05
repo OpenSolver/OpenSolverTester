@@ -21,7 +21,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("D17:H17"), RelationEQ, Me.Range("D18:H18")
     OpenSolver.SetChosenSolver Solver
     
-    OpenSolver.SetDualsNewSheet True
+    OpenSolver.SetDualsOnSheet True
     OpenSolver.SetUpdateSensitivity True
     
     ' NOMAD is sensitive on this problem, so we give it a bigger tolerance

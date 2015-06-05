@@ -19,7 +19,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("G10:G11"), RelationLE, Me.Range("I10:I11")
     OpenSolver.SetChosenSolver Solver
     OpenSolver.SetObjectiveSense MaximiseObjective
-    OpenSolver.SetDualsNewSheet True
+    OpenSolver.SetDualsOnSheet True
     OpenSolver.SetUpdateSensitivity True
     
     Test = RunTest(Me, Solver)

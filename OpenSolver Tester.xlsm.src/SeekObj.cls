@@ -21,7 +21,7 @@ Function Test(Solver As String) As TestResult
     
     OpenSolver.SetObjectiveSense TargetObjective
     OpenSolver.SetObjectiveTargetValue 50
-    OpenSolver.SetDualsNewSheet True
+    OpenSolver.SetDualsOnSheet True
     OpenSolver.SetUpdateSensitivity True
     
     Test = RunTest(Me, Solver)
