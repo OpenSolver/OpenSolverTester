@@ -73,6 +73,7 @@ Function ApiTest(SheetName As String, Solver As String) As TestResult
     Case "NonLin6":                     ApiTest = NonLin6.Test(Solver)
     Case "FractionalCoeffs":            ApiTest = FractionalCoeffs.Test(Solver)
     Case "SeekObj":                     ApiTest = SeekObj.Test(Solver)
+    Case "DiffSheetObj":                ApiTest = DiffSheetObj.Test(Solver)
     Case "EscapeSheetName(1)+2-1":      ApiTest = EscapeSheetName.Test(Solver)
     Case "NonLinBinary":                ApiTest = NonLinBinary.Test(Solver)
 '    Case "Highlighting":                ApiTest = Highlighting.Test(Solver)
