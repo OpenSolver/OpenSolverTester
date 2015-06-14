@@ -98,8 +98,6 @@ Sub RunAllTests(Optional Clear As Boolean = False)
                 GoTo NextSheet
             End If
             
-            Sheets(SheetName).Activate
-            
             ' Read problem type and test the appropriate solvers for each test
             ProblemType = Sheets(.List(listIndex)).Cells(4, 1)
             For Each Solver In OpenSolver.GetAvailableSolvers

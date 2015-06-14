@@ -10,22 +10,20 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Function Test(Solver As String) As TestResult
-    Me.Activate
-    OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Me.Range("D4:F4")
-    OpenSolver.SetObjectiveFunctionCell Me.Range("H6")
-    OpenSolver.AddConstraint Me.Range("H8"), RelationLE, Me.Range("J8")
-    OpenSolver.AddConstraint Me.Range("H9:H10"), RelationGE, Me.Range("J9:J10")
-    OpenSolver.SetChosenSolver Solver
-    
+    OpenSolver.ResetModel Me
+    OpenSolver.SetDecisionVariables Me.Range("D4:F4"), Me
+    OpenSolver.SetObjectiveFunctionCell Me.Range("H6"), Me
+    OpenSolver.AddConstraint Me.Range("H8"), RelationLE, Me.Range("J8"), sheet:=Me
+    OpenSolver.AddConstraint Me.Range("H9:H10"), RelationGE, Me.Range("J9:J10"), sheet:=Me
+    OpenSolver.SetChosenSolver Solver, Me
     
     If SolverLinearity(OpenSolver.CreateSolver(Solver)) <> OpenSolver_SolverType.Linear Then
         Test = NA
         Exit Function
     End If
     
-    OpenSolver.SetQuickSolveParameters Me.Range("O7:P7")
-    OpenSolver.InitializeQuickSolve
+    OpenSolver.SetQuickSolveParameters Me.Range("O7:P7"), Me
+    OpenSolver.InitializeQuickSolve sheet:=Me
     
     ' Test first set of values
     Dim SolveResult As OpenSolverResult

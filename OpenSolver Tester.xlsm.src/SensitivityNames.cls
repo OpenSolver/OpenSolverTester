@@ -10,30 +10,29 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Function Test(Solver As String) As TestResult
-    Me.Activate
-    OpenSolver.ResetModel
+    OpenSolver.ResetModel Me
     
     ' Hack for NOMAD range issues in non-english locales. See TestRunner for info
-    OpenSolver.SetDecisionVariables Me.Range("D14:H16" & Separator & "J21")
+    OpenSolver.SetDecisionVariables Me.Range("D14:H16" & Separator & "J21"), Me
     
-    OpenSolver.SetObjectiveFunctionCell Me.Range("D20")
-    OpenSolver.AddConstraint Me.Range("I14:I16"), RelationLE, Me.Range("J14:J16")
-    OpenSolver.AddConstraint Me.Range("D17:H17"), RelationEQ, Me.Range("D18:H18")
-    OpenSolver.SetChosenSolver Solver
+    OpenSolver.SetObjectiveFunctionCell Me.Range("D20"), Me
+    OpenSolver.AddConstraint Me.Range("I14:I16"), RelationLE, Me.Range("J14:J16"), sheet:=Me
+    OpenSolver.AddConstraint Me.Range("D17:H17"), RelationEQ, Me.Range("D18:H18"), sheet:=Me
+    OpenSolver.SetChosenSolver Solver, Me
     
-    OpenSolver.SetDualsOnSheet True
-    OpenSolver.SetUpdateSensitivity True
+    OpenSolver.SetDualsOnSheet True, Me
+    OpenSolver.SetUpdateSensitivity True, Me
     
     ' NOMAD is sensitive on this problem, so we give it a bigger tolerance
-    OpenSolver.SetPrecision 0.0001
+    OpenSolver.SetPrecision 0.0001, Me
     
     Test = RunTest(Me, Solver)
     Test = TestSensitivity(Test, Solver)
     
     If Test <> Pass Then Exit Function
     
-    OpenSolver.SetNonNegativity False
-    OpenSolver.AddConstraint Me.Range("D14:H16"), RelationGE, RHSFormula:="0"
+    OpenSolver.SetNonNegativity False, Me
+    OpenSolver.AddConstraint Me.Range("D14:H16"), RelationGE, RHSFormula:="0", sheet:=Me
     
     Test = RunTest(Me, Solver)
     Test = TestSensitivity(Test, Solver)

@@ -8,11 +8,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Function Test(Solver As String) As TestResult
-    Me.Activate
-    OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Me.Range("D7:D8")
-    OpenSolver.SetObjectiveFunctionCell Me.Range("F15")
-    OpenSolver.SetChosenSolver Solver
+    OpenSolver.ResetModel Me
+    OpenSolver.SetDecisionVariables Me.Range("D7:D8"), Me
+    OpenSolver.SetObjectiveFunctionCell Me.Range("F15"), Me
+    OpenSolver.SetChosenSolver Solver, Me
     
     ' Starting point 1
     Me.Range("D7").Value = -30

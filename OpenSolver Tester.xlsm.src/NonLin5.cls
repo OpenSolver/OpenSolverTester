@@ -8,11 +8,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Function Test(Solver As String) As TestResult
-    Me.Activate
-    OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Me.Range("F2:I2")
-    OpenSolver.SetObjectiveFunctionCell Me.Range("J7")
-    OpenSolver.SetChosenSolver Solver
+    OpenSolver.ResetModel Me
+    OpenSolver.SetDecisionVariables Me.Range("F2:I2"), Me
+    OpenSolver.SetObjectiveFunctionCell Me.Range("J7"), Me
+    OpenSolver.SetChosenSolver Solver, Me
     
     ' Reset decision vars so non-linear solvers avoid an evaluating sqrt(0)
     Me.Range("F2").Value = 1

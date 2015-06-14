@@ -10,13 +10,12 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Function Test(Solver As String) As TestResult
-    Me.Activate
-    OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Me.Range("S10:S11")
-    OpenSolver.SetObjectiveFunctionCell Me.Range("S13")
-    OpenSolver.AddConstraint Me.Range("S10:S11"), RelationGE, Me.Range("Q10:Q11")
-    OpenSolver.AddConstraint Me.Range("S10:S11"), RelationLE, Me.Range("U10:U11")
-    OpenSolver.SetChosenSolver Solver
+    OpenSolver.ResetModel Me
+    OpenSolver.SetDecisionVariables Me.Range("S10:S11"), Me
+    OpenSolver.SetObjectiveFunctionCell Me.Range("S13"), Me
+    OpenSolver.AddConstraint Me.Range("S10:S11"), RelationGE, Me.Range("Q10:Q11"), sheet:=Me
+    OpenSolver.AddConstraint Me.Range("S10:S11"), RelationLE, Me.Range("U10:U11"), sheet:=Me
+    OpenSolver.SetChosenSolver Solver, Me
     
     Test = RunTest(Me, Solver)
 End Function

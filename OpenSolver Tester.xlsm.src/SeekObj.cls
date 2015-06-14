@@ -10,19 +10,18 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Function Test(Solver As String) As TestResult
-    Me.Activate
-    OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Me.Range("D2:F2")
-    OpenSolver.SetObjectiveFunctionCell Me.Range("G4")
-    OpenSolver.AddConstraint Me.Range("G6"), RelationEQ, Me.Range("I6")
-    OpenSolver.AddConstraint Me.Range("G7"), RelationGE, Me.Range("I7")
-    OpenSolver.AddConstraint Me.Range("G8:G9"), RelationLE, Me.Range("I8:I9")
-    OpenSolver.SetChosenSolver Solver
+    OpenSolver.ResetModel Me
+    OpenSolver.SetDecisionVariables Me.Range("D2:F2"), Me
+    OpenSolver.SetObjectiveFunctionCell Me.Range("G4"), Me
+    OpenSolver.AddConstraint Me.Range("G6"), RelationEQ, Me.Range("I6"), sheet:=Me
+    OpenSolver.AddConstraint Me.Range("G7"), RelationGE, Me.Range("I7"), sheet:=Me
+    OpenSolver.AddConstraint Me.Range("G8:G9"), RelationLE, Me.Range("I8:I9"), sheet:=Me
+    OpenSolver.SetChosenSolver Solver, Me
     
-    OpenSolver.SetObjectiveSense TargetObjective
-    OpenSolver.SetObjectiveTargetValue 50
-    OpenSolver.SetDualsOnSheet True
-    OpenSolver.SetUpdateSensitivity True
+    OpenSolver.SetObjectiveSense TargetObjective, Me
+    OpenSolver.SetObjectiveTargetValue 50, Me
+    OpenSolver.SetDualsOnSheet True, Me
+    OpenSolver.SetUpdateSensitivity True, Me
     
     Test = RunTest(Me, Solver)
     If SensitivityAnalysisAvailable(CreateSolver(Solver)) Then

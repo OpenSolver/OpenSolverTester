@@ -10,11 +10,10 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Function Test(Solver As String) As TestResult
-    Me.Activate
-    OpenSolver.ResetModel
-    OpenSolver.SetDecisionVariables Me.Range("D11")
-    OpenSolver.SetObjectiveFunctionCell Me.Range("D16")
-    OpenSolver.SetChosenSolver Solver
+    OpenSolver.ResetModel Me
+    OpenSolver.SetDecisionVariables Me.Range("D11"), Me
+    OpenSolver.SetObjectiveFunctionCell Me.Range("D16"), Me
+    OpenSolver.SetChosenSolver Solver, Me
     
     ' Avoid error on zero in cell
     Me.Range("D11").Value = 1
