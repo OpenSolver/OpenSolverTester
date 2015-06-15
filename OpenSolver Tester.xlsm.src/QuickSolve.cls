@@ -30,14 +30,14 @@ Function Test(Solver As String) As TestResult
     Dim CorrectResult1 As Boolean
     Me.Range("Scale").Value = -2
     Me.Range("Offset").Value = 4
-    SolveResult = OpenSolver.RunQuickSolve(True)
+    SolveResult = OpenSolver.RunQuickSolve(False, True)
     CorrectResult1 = Me.Range("H16").Value And SolveResult = OpenSolverResult.Optimal
     
     ' Test second set of values
     Dim CorrectResult2 As Boolean
     Me.Range("Scale").Value = 2.5
     Me.Range("Offset").Value = -50
-    SolveResult = OpenSolver.RunQuickSolve(True)
+    SolveResult = OpenSolver.RunQuickSolve(False, True)
     CorrectResult2 = Me.Range("H20").Value And SolveResult = OpenSolverResult.Optimal
     
     If CorrectResult1 And CorrectResult2 Then
