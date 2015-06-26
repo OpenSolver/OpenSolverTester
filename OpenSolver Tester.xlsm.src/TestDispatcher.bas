@@ -11,6 +11,7 @@ Function ApiTest(SheetName As String, Solver As String) As TestResult
     
     Select Case SheetName
     Case "SimpleLP":                    ApiTest = SimpleLP.Test(Solver)
+    Case "SimpleIP":                    ApiTest = SimpleIP.Test(Solver)
     Case "OverlappingVars":             ApiTest = OverlappingVars.Test(Solver)
     Case "BlankRHS":                    ApiTest = BlankRHS.Test(Solver)
     Case "BlankLHS":                    ApiTest = BlankLHS.Test(Solver)
