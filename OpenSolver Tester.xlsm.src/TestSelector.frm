@@ -1,7 +1,7 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} TestSelector
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} TestSelector 
    Caption         =   "Select tests to run"
-   ClientHeight    =   5055
+   ClientHeight    =   5565
    ClientLeft      =   0
    ClientTop       =   -2220
    ClientWidth     =   7065
@@ -16,7 +16,7 @@ Attribute VB_Exposed = False
 Sub RefreshTestListBox()
     With Me.lstTests
         .Clear
-
+    
         ' Loop through worksheets looking for sheets with the testing pane present.
         Dim ws As Worksheet
         For Each ws In ActiveWorkbook.Worksheets
@@ -29,8 +29,6 @@ Sub RefreshTestListBox()
     ' Decheck select all box
     Me.chkAllTests.Value = False
 End Sub
-
-
 
 Private Sub chkAllTests_Change()
     With Me.lstTests
@@ -59,7 +57,9 @@ End Sub
 
 Private Sub cmdRun_Click()
     Me.Hide
-    RunAllTests CheckBox2.Value
+    SOLVE_LOCAL = chkLocalNeos.Value
+    RunAllTests chkClearResults.Value
+    SOLVE_LOCAL = False
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -69,7 +69,7 @@ End Sub
 
 Sub RefreshSolvers()
     Dim SolverShortName As Variant, Solver As Object
-
+    
     Me.lstLinearSolvers.Clear
     Me.lstNonLinearSolvers.Clear
     For Each SolverShortName In OpenSolver.GetAvailableSolvers()
