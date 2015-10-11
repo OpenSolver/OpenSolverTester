@@ -46,6 +46,17 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
         On Error GoTo 0
         
         ' VARIABLES
+        ' Check headings
+        If SensitivitySheet.Range("B6").Value <> "Cells" Or _
+           SensitivitySheet.Range("C6").Value <> "Name" Or _
+           SensitivitySheet.Range("D6").Value <> "Final Value" Or _
+           SensitivitySheet.Range("E6").Value <> "Reduced Costs" Or _
+           SensitivitySheet.Range("F6").Value <> "Objective Value" Or _
+           SensitivitySheet.Range("G6").Value <> "Allowable Increase" Or _
+           SensitivitySheet.Range("H6").Value <> "Allowable Decrease" Then
+            Test = Fail
+        End If
+        
         ' Check names
         If SensitivitySheet.Range("C7").Value <> "KWR AUCK" Or _
            SensitivitySheet.Range("C8").Value <> "KWR SYD" Or _
@@ -93,6 +104,17 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
         End If
         
         ' CONSTRAINTS
+        ' Check headings
+        If SensitivitySheet.Range("B25").Value <> "Cells" Or _
+           SensitivitySheet.Range("C25").Value <> "Name" Or _
+           SensitivitySheet.Range("D25").Value <> "Final Value" Or _
+           SensitivitySheet.Range("E25").Value <> "Shadow Price" Or _
+           SensitivitySheet.Range("F25").Value <> "RHS Value" Or _
+           SensitivitySheet.Range("G25").Value <> "Allowable Increase" Or _
+           SensitivitySheet.Range("H25").Value <> "Allowable Decrease" Then
+            Test = Fail
+        End If
+        
         ' Check names
         If SensitivitySheet.Range("C26").Value <> "KWR Total" Or _
            SensitivitySheet.Range("C27").Value <> "BYR Total" Or _

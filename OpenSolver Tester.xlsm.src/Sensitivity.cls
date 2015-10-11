@@ -20,6 +20,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetObjectiveSense MaximiseObjective, Me
     OpenSolver.SetDualsOnSheet True, Me
     OpenSolver.SetUpdateSensitivity True, Me
+    OpenSolver.SetDuals Me.Range("K1"), Me
     
     Test = RunTest(Me, Solver)
     If SensitivityAnalysisAvailable(CreateSolver(Solver)) Then
@@ -50,6 +51,55 @@ Function Test(Solver As String) As TestResult
         Application.DisplayAlerts = False
         SensitivitySheet.Delete
         Application.DisplayAlerts = True
+        
+        If Me.Range("K1").Value <> "Cons" Or _
+           Me.Range("L1").Value <> "SP" Or _
+           Me.Range("M1").Value <> "Inc" Or _
+           Me.Range("N1").Value <> "Dec" Then
+            Test = Fail
+        End If
+        
+        If Me.Range("K2").Value <> "G8<=I8" Or _
+           Me.Range("K3").Value <> "G9>=I9" Or _
+           Me.Range("K4").Value <> "G10<=I10" Or _
+           Me.Range("K5").Value <> "G11<=I11" Then
+            Test = Fail
+        End If
+
+        If Me.Range("L2").Value <> 0 Or _
+           Me.Range("L3").Value <> -1 Or _
+           Me.Range("L4").Value <> 0 Or _
+           Me.Range("L5").Value <> 2 Or _
+           Me.Range("M3").Value <> 3 Or _
+           Me.Range("M5").Value <> 2 Or _
+           Me.Range("N2").Value <> 5 Or _
+           Me.Range("N3").Value <> 2 Or _
+           Me.Range("N4").Value <> 2 Or _
+           Me.Range("N5").Value <> 3 Then
+            Test = Fail
+        End If
+        
+        If Me.Range("K7").Value <> "Vars" Or _
+           Me.Range("L7").Value <> "RC" Or _
+           Me.Range("M7").Value <> "Inc" Or _
+           Me.Range("N7").Value <> "Dec" Then
+            Test = Fail
+        End If
+        
+        If Me.Range("K8").Value <> "D4" Or _
+           Me.Range("K9").Value <> "E4" Or _
+           Me.Range("K10").Value <> "F4" Then
+            Test = Fail
+        End If
+        
+        If Me.Range("L8").Value <> -1 Or _
+           Me.Range("L9").Value <> 0 Or _
+           Me.Range("L10").Value <> 0 Or _
+           Me.Range("M8").Value <> 1 Or _
+           Not OpenSolver.IsZero(Me.Range("M9").Value - 1) Or _
+           Not OpenSolver.IsZero(Me.Range("N10").Value - 1) Then
+            Test = Fail
+        End If
     End If
     Exit Function
     
