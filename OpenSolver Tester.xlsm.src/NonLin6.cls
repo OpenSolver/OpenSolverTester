@@ -13,6 +13,11 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetObjectiveFunctionCell Me.Range("F15"), Me
     OpenSolver.SetChosenSolver Solver, Me
     
+    OpenSolver.AddConstraint Me.Range("D7"), RelationGE, RHSFormula:=0, sheet:=Me
+    OpenSolver.AddConstraint Me.Range("D7"), RelationLE, RHSFormula:=90, sheet:=Me
+    OpenSolver.AddConstraint Me.Range("D8"), RelationGE, RHSFormula:=-180, sheet:=Me
+    OpenSolver.AddConstraint Me.Range("D8"), RelationLE, RHSFormula:=0, sheet:=Me
+    
     ' Starting point 1
     Me.Range("D7").Value = -30
     Me.Range("D8").Value = 50

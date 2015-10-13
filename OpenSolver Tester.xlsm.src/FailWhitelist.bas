@@ -35,17 +35,11 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' BONMIN
     ' ==================================
         
-    Case "NonLin6_Bonmin"        ' Bonmin can't solve this problem from the given starting points
-        TestShouldFail = True
-        
     ' ==================================
     ' NOMAD
     ' ==================================
         
     Case "Unbounded_NOMAD"  ' Reports large optimal solution rather than unbounded
-        TestShouldFail = True
-        
-    Case "NonLin6_NOMAD"  ' Sometimes fails based on starting solution
         TestShouldFail = True
         
     ' ==================================
@@ -62,8 +56,7 @@ Function TestShouldFail(SheetName As String, Solver As String) As Boolean
     ' NEOS BONMIN
     ' ==================================
     
-    Case "NonLin6_NeosBon"        ' Bonmin can't solve this problem from the given starting points
-        TestShouldFail = True
+    ' ==================================
 
 
     Case Else
