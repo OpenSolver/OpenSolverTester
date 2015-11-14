@@ -83,8 +83,7 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
            Not OpenSolver.IsZero(SensitivitySheet.Range("G14").Value - 5) Or _
            Not OpenSolver.IsZero(SensitivitySheet.Range("G15").Value - 5) Or _
            Not OpenSolver.IsZero(SensitivitySheet.Range("G18").Value - 5) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("G21").Value - 5) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("G22").Value - 0) Then
+           Not OpenSolver.IsZero(SensitivitySheet.Range("G21").Value - 5) Then
             Test = Fail
         End If
         ' Check decreases
