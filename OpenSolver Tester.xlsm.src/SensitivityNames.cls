@@ -13,7 +13,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.ResetModel Me
     
     ' Hack for NOMAD range issues in non-english locales. See TestRunner for info
-    OpenSolver.SetDecisionVariables Me.Range("D14:H16" & Separator & "J21"), Me
+    OpenSolver.SetDecisionVariables Me.Range("J21" & Separator & "D14:H16"), Me
     
     OpenSolver.SetObjectiveFunctionCell Me.Range("D20"), Me
     OpenSolver.AddConstraint Me.Range("I14:I16"), RelationLE, Me.Range("J14:J16"), sheet:=Me
@@ -58,47 +58,47 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
         End If
         
         ' Check names
-        If SensitivitySheet.Range("C7").Value <> "KWR AUCK" Or _
-           SensitivitySheet.Range("C8").Value <> "KWR SYD" Or _
-           SensitivitySheet.Range("C9").Value <> "KWR MEL" Or _
-           SensitivitySheet.Range("C10").Value <> "KWR BRI" Or _
-           SensitivitySheet.Range("C11").Value <> "KWR ADEL" Or _
-           SensitivitySheet.Range("C12").Value <> "BYR AUCK" Or _
-           SensitivitySheet.Range("C13").Value <> "BYR SYD" Or _
-           SensitivitySheet.Range("C14").Value <> "BYR MEL" Or _
-           SensitivitySheet.Range("C15").Value <> "BYR BRI" Or _
-           SensitivitySheet.Range("C16").Value <> "BYR ADEL" Or _
-           SensitivitySheet.Range("C17").Value <> "ALB AUCK" Or _
-           SensitivitySheet.Range("C18").Value <> "ALB SYD" Or _
-           SensitivitySheet.Range("C19").Value <> "ALB MEL" Or _
-           SensitivitySheet.Range("C20").Value <> "ALB BRI" Or _
-           SensitivitySheet.Range("C21").Value <> "ALB ADEL" Or _
-           SensitivitySheet.Range("C22").Value <> "SPARE" Then
+        If SensitivitySheet.Range("C7").Value <> "SPARE" Or _
+           SensitivitySheet.Range("C8").Value <> "KWR AUCK" Or _
+           SensitivitySheet.Range("C9").Value <> "KWR SYD" Or _
+           SensitivitySheet.Range("C10").Value <> "KWR MEL" Or _
+           SensitivitySheet.Range("C11").Value <> "KWR BRI" Or _
+           SensitivitySheet.Range("C12").Value <> "KWR ADEL" Or _
+           SensitivitySheet.Range("C13").Value <> "BYR AUCK" Or _
+           SensitivitySheet.Range("C14").Value <> "BYR SYD" Or _
+           SensitivitySheet.Range("C15").Value <> "BYR MEL" Or _
+           SensitivitySheet.Range("C16").Value <> "BYR BRI" Or _
+           SensitivitySheet.Range("C17").Value <> "BYR ADEL" Or _
+           SensitivitySheet.Range("C18").Value <> "ALB AUCK" Or _
+           SensitivitySheet.Range("C19").Value <> "ALB SYD" Or _
+           SensitivitySheet.Range("C20").Value <> "ALB MEL" Or _
+           SensitivitySheet.Range("C21").Value <> "ALB BRI" Or _
+           SensitivitySheet.Range("C22").Value <> "ALB ADEL" Then
             Test = Fail
         End If
         ' Check increases
-        If Not OpenSolver.IsZero(SensitivitySheet.Range("G7").Value - 35) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("G8").Value - 10) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("G13").Value - 5) Or _
+        If Not OpenSolver.IsZero(SensitivitySheet.Range("G8").Value - 35) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("G9").Value - 10) Or _
            Not OpenSolver.IsZero(SensitivitySheet.Range("G14").Value - 5) Or _
            Not OpenSolver.IsZero(SensitivitySheet.Range("G15").Value - 5) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("G18").Value - 5) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("G21").Value - 5) Then
+           Not OpenSolver.IsZero(SensitivitySheet.Range("G16").Value - 5) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("G19").Value - 5) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("G22").Value - 5) Then
             Test = Fail
         End If
         ' Check decreases
-        If Not OpenSolver.IsZero(SensitivitySheet.Range("H8").Value - 10) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H9").Value - 15) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H10").Value - 10) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H11").Value - 25) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H12").Value - 35) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H13").Value - 5) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H16").Value - 5) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H17").Value - 55) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H18").Value - 5) Or _
+        If Not OpenSolver.IsZero(SensitivitySheet.Range("H7").Value - 0) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H9").Value - 10) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H10").Value - 15) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H11").Value - 10) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H12").Value - 25) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H13").Value - 35) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H14").Value - 5) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H17").Value - 5) Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H18").Value - 55) Or _
            Not OpenSolver.IsZero(SensitivitySheet.Range("H19").Value - 5) Or _
            Not OpenSolver.IsZero(SensitivitySheet.Range("H20").Value - 5) Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H22").Value - 0) Then
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H21").Value - 5) Then
             Test = Fail
         End If
         
