@@ -41,7 +41,7 @@ Function Test(Solver As String) As TestResult
         Me.Cells(5, 3 + Offset).Value = ParameterName
         Me.Cells(5, 4 + Offset).Value = 0.21
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         Me.Cells(5, 3 + Offset).Value = "dualBound"  ' Restore name
         
         ' Bad parameter value
@@ -49,7 +49,7 @@ Function Test(Solver As String) As TestResult
         Me.Cells(7, 3 + Offset).Value = ParameterName
         Me.Cells(7, 4 + Offset).Value = 0.5
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Valid parameters
         Me.Cells(5, 3 + Offset).Value = "dualBound"
@@ -74,14 +74,14 @@ Function Test(Solver As String) As TestResult
         Me.Range("F5").Value = ParameterName
         Me.Range("G5").Value = 10
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Bad parameter value
         ParameterName = "IterationLimit"
         Me.Range("F5").Value = ParameterName
         Me.Range("G5").Value = -1
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Valid parameters
         Me.Range("F5").Value = "IterationLimit"
@@ -102,14 +102,14 @@ Function Test(Solver As String) As TestResult
         Me.Cells(5, 12 + Offset).Value = ParameterName
         Me.Cells(5, 13 + Offset).Value = 1
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Bad parameter value
         ParameterName = "max_iter"
         Me.Cells(5, 12 + Offset).Value = ParameterName
         Me.Cells(5, 13 + Offset).Value = -1
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Valid parameters
         Me.Cells(5, 12 + Offset).Value = "max_iter"
@@ -131,14 +131,14 @@ Function Test(Solver As String) As TestResult
         Me.Cells(5, 15 + Offset).Value = ParameterName
         Me.Cells(5, 16 + Offset).Value = 0.00001
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Bad parameter value
         ParameterName = "time_limit"
         Me.Cells(5, 15 + Offset).Value = ParameterName
         Me.Cells(5, 16 + Offset).Value = -1
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Valid parameters
         Me.Cells(5, 15 + Offset).Value = "time_limit"
@@ -162,14 +162,14 @@ Function Test(Solver As String) As TestResult
         Me.Range("R5").Value = ParameterName
         Me.Range("S5").Value = 1
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Bad parameter value
         ParameterName = "stop_if_feasible"
         Me.Range("R5").Value = ParameterName
         Me.Range("S5").Value = 0.5
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.ErrorOccurred Then GoTo Failed
-        If Not OpenSolver.InStrText(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
+        If Not InStr(OpenSolver.ErrMsg, ParameterName) > 0 Then GoTo Failed
         
         ' Valid parameters
         Me.Range("R5").Value = "stop_if_feasible"
