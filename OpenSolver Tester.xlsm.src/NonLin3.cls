@@ -17,6 +17,8 @@ Function Test(Solver As String) As TestResult
     OpenSolver.AddConstraint Me.Range("S10:S11"), RelationLE, Me.Range("U10:U11"), sheet:=Me
     OpenSolver.SetChosenSolver Solver, Me
     
+    Me.Range("S10:S11").Value2 = 1
+    
     Test = RunTest(Me, Solver)
 End Function
 
