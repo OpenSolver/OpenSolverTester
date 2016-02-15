@@ -62,8 +62,17 @@ Private Sub FixReferences()
     
     ' Add the reference back
     ' Assumes OpenSolver and OpenSolverTester folders are in the same root directory
-    VBProj.References.AddFromFile ThisWorkbook.Path & Application.PathSeparator & _
-                                  ".." & Application.PathSeparator & _
-                                  "OpenSolver" & Application.PathSeparator & _
-                                  "OpenSolver.xlam"
+    Dim OpenSolverPath As String
+    OpenSolverPath = ThisWorkbook.Path & Application.PathSeparator & _
+                     ".." & Application.PathSeparator & _
+                     "OpenSolver" & Application.PathSeparator & _
+                     "OpenSolver.xlam"
+    On Error GoTo NotFound
+    VBProj.References.AddFromFile OpenSolverPath
+    Exit Sub
+    
+NotFound:
+    MsgBox "Unable to add reference to OpenSolver.xlam at:" & vbNewLine & _
+           OpenSolverPath & vbNewLine & vbNewLine & _
+           "Make sure the OpenSolver and OpenSolverTester folders are in the same root directory."
 End Sub
