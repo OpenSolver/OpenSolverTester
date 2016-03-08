@@ -18,6 +18,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetObjectiveFunctionCell Me.Range("D20"), Me
     OpenSolver.AddConstraint Me.Range("I14:I16"), RelationLE, Me.Range("J14:J16"), sheet:=Me
     OpenSolver.AddConstraint Me.Range("D17:H17"), RelationEQ, Me.Range("D18:H18"), sheet:=Me
+    OpenSolver.AddConstraint Me.Range("J24"), RelationEQ, Me.Range("J24"), sheet:=Me
     OpenSolver.SetChosenSolver Solver, Me
     
     OpenSolver.SetDualsOnSheet True, Me
@@ -122,7 +123,8 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
            SensitivitySheet.Range("C30").Value <> "Total SYD" Or _
            SensitivitySheet.Range("C31").Value <> "Total MEL" Or _
            SensitivitySheet.Range("C32").Value <> "Total BRI" Or _
-           SensitivitySheet.Range("C33").Value <> "Total ADEL" Then
+           SensitivitySheet.Range("C33").Value <> "Total ADEL" Or _
+           SensitivitySheet.Range("C34").Value <> "Empty Constraint" Then
             Test = Fail
         End If
         ' Check shadow prices
@@ -133,7 +135,8 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
            SensitivitySheet.Range("E30").Value <> 30 Or _
            SensitivitySheet.Range("E31").Value <> 25 Or _
            SensitivitySheet.Range("E32").Value <> 30 Or _
-           SensitivitySheet.Range("E33").Value <> 35 Then
+           SensitivitySheet.Range("E33").Value <> 35 Or _
+           SensitivitySheet.Range("E34").Value <> 0 Then
             Test = Fail
         End If
         ' Check increases
@@ -143,7 +146,8 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
            SensitivitySheet.Range("G30").Value <> 0 Or _
            SensitivitySheet.Range("G31").Value <> 0 Or _
            SensitivitySheet.Range("G32").Value <> 0 Or _
-           SensitivitySheet.Range("G33").Value <> 0 Then
+           SensitivitySheet.Range("G33").Value <> 0 Or _
+           SensitivitySheet.Range("G34").Value <> 0 Then
             Test = Fail
         End If
         ' Check decreases
@@ -154,7 +158,8 @@ Private Function TestSensitivity(Test As TestResult, Solver As String) As TestRe
            SensitivitySheet.Range("H30").Value <> 100 Or _
            SensitivitySheet.Range("H31").Value <> 100 Or _
            SensitivitySheet.Range("H32").Value <> 100 Or _
-           SensitivitySheet.Range("H33").Value <> 100 Then
+           SensitivitySheet.Range("H33").Value <> 100 Or _
+           SensitivitySheet.Range("H34").Value <> 0 Then
             Test = Fail
         End If
     

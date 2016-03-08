@@ -37,13 +37,16 @@ Function Test(Solver As String) As TestResult
            SensitivitySheet.Range("E14").Value <> 0 Or _
            SensitivitySheet.Range("E15").Value <> 0 Or _
            SensitivitySheet.Range("E16").Value <> 0 Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("G13").Value - 21.6) Or _
+           SensitivitySheet.Range("F13").Value <> 350 Or _
+           SensitivitySheet.Range("F14").Value <> 100 Or _
+           SensitivitySheet.Range("F15").Value <> 0 Or _
+           SensitivitySheet.Range("F16").Value <> 72 Or _
+           SensitivitySheet.Range("G13").Value <> 0 Or _
            SensitivitySheet.Range("G14").Value <> 0 Or _
-           SensitivitySheet.Range("G15").Value <> 0 Or _
-           SensitivitySheet.Range("H13").Value <> 0 Or _
-           Not OpenSolver.IsZero(SensitivitySheet.Range("H14").Value - 166.66666667) Or _
-           SensitivitySheet.Range("H15").Value <> 100 Or _
-           SensitivitySheet.Range("H16").Value <> 500 Then
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H13").Value - 166.66666667) Or _
+           SensitivitySheet.Range("H14").Value <> 100 Or _
+           SensitivitySheet.Range("H15").Value <> 500 Or _
+           Not OpenSolver.IsZero(SensitivitySheet.Range("H16").Value - 72) Then
             Test = Fail
         End If
     
