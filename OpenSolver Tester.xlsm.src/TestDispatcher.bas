@@ -12,6 +12,7 @@ Function ApiTest(SheetName As String, Solver As String) As TestResult
     Select Case SheetName
     Case "SimpleLP":                    ApiTest = SimpleLP.Test(Solver)
     Case "SimpleIP":                    ApiTest = SimpleIP.Test(Solver)
+    Case "IP_SUMIF":                    ApiTest = IP_SUMIF.Test(Solver)
     Case "OverlappingVars":             ApiTest = OverlappingVars.Test(Solver)
     Case "BlankRHS":                    ApiTest = BlankRHS.Test(Solver)
     Case "BlankLHS":                    ApiTest = BlankLHS.Test(Solver)
@@ -74,6 +75,7 @@ Function ApiTest(SheetName As String, Solver As String) As TestResult
     Case "NonLin6":                     ApiTest = NonLin6.Test(Solver)
     Case "FractionalCoeffs":            ApiTest = FractionalCoeffs.Test(Solver)
     Case "SeekObj":                     ApiTest = SeekObj.Test(Solver)
+    Case "SeekObjInf":                  ApiTest = SeekObjInf.Test(Solver)
     Case "DiffSheetObj":                ApiTest = DiffSheetObj.Test(Solver)
     Case "EscapeSheetName(1)+2-1":      ApiTest = EscapeSheetName.Test(Solver)
     Case "NonLinBinary":                ApiTest = NonLinBinary.Test(Solver)
