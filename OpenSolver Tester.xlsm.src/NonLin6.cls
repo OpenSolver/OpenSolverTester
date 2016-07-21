@@ -30,5 +30,12 @@ Function Test(Solver As String) As TestResult
     Me.Range("D8").Value = -50
     
     Test = RunTest(Me, Solver)
+    If Test <> Pass Then Exit Function
+    
+    ' Starting point 3 - Outside the bounds
+    Me.Range("D7").Value = 50
+    Me.Range("D8").Value = 10
+    
+    Test = RunTest(Me, Solver)
 End Function
 
