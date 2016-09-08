@@ -13,6 +13,7 @@ Function Test(Solver As String) As TestResult
     OpenSolver.ResetModel Me
     OpenSolver.SetDecisionVariables Me.Range("D11"), Me
     OpenSolver.SetObjectiveFunctionCell Me.Range("D16"), Me
+    OpenSolver.AddConstraint Me.Range("D11"), RelationLE, RHSFormula:=1000, sheet:=Me
     OpenSolver.SetChosenSolver Solver, Me
     
     ' Avoid error on zero in cell
