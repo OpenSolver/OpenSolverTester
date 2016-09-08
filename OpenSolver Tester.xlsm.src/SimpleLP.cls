@@ -19,4 +19,11 @@ Function Test(Solver As String) As TestResult
     OpenSolver.SetChosenSolver Solver, Me
         
     Test = RunTest(Me, Solver)
+    If Test <> Pass Then Exit Function
+    
+    ' Try large values for TimeLimit and IterationLimit
+    OpenSolver.SetMaxIterations 1E+25, sheet:=Me
+    OpenSolver.SetMaxTime 1E+25, sheet:=Me
+        
+    Test = RunTest(Me, Solver)
 End Function

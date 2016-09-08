@@ -24,7 +24,7 @@ Function Test(Solver As String) As TestResult
     Dim Offset As Long, ParameterName As String
     Select Case Solver
     Case "CBC", "NeosCBC"
-        OpenSolver.SetMaxIterations 1, Me
+        OpenSolver.SetMaxIterations 1.5, Me
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.LimitedSubOptimal Then GoTo Failed
         
         ' Reset MaxIterations
@@ -62,7 +62,7 @@ Function Test(Solver As String) As TestResult
            Me.Range("A6").Value <> True Then GoTo Failed
            
     Case "Gurobi"
-        OpenSolver.SetMaxIterations 1, Me
+        OpenSolver.SetMaxIterations 1.5, Me
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.LimitedSubOptimal Then GoTo Failed
         
         ' Test custom parameters for Gurobi
@@ -150,7 +150,7 @@ Function Test(Solver As String) As TestResult
     Case "NOMAD"
         OpenSolver.GetDecisionVariables(Me).Value = 0
         Me.Range("E13").Value = 180 / 34
-        OpenSolver.SetMaxIterations 20, Me
+        OpenSolver.SetMaxIterations 20.5, Me
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.LimitedSubOptimal Then GoTo Failed
         
         ' Test custom parameters for NOMAD
