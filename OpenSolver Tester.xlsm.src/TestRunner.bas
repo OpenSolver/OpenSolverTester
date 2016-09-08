@@ -71,7 +71,18 @@ Sub RunAllTests(Optional Clear As Boolean = False)
     Sheets("Results").Cells(1, 3).Value = "Tests marked with * are expected to fail. Look at the test whitelist module for info on why they should fail"
     SetResultCell 1, j, "Test"
     
-    For Each Solver In OpenSolver.GetAvailableSolvers
+    Dim AllSolvers() As String
+    AllSolvers = OpenSolver.GetAvailableSolvers()
+    
+    ' Move Couenne to end of solvers
+    Dim i As Long, Found As Boolean
+    For i = LBound(AllSolvers) To UBound(AllSolvers)
+        If Found Then AllSolvers(i - 1) = AllSolvers(i)
+        If AllSolvers(i) = "Couenne" Then Found = True
+    Next i
+    If Found Then AllSolvers(UBound(AllSolvers)) = "Couenne"
+    
+    For Each Solver In AllSolvers
         j = j + 1
         SetResultCell 1, j, Solver
     Next Solver
@@ -100,7 +111,7 @@ Sub RunAllTests(Optional Clear As Boolean = False)
             
             ' Read problem type and test the appropriate solvers for each test
             ProblemType = Sheets(.List(listIndex)).Cells(4, 1)
-            For Each Solver In OpenSolver.GetAvailableSolvers
+            For Each Solver In AllSolvers
                 j = j + 1
                 If TestKeyExists(SolversPresent, CStr(Solver)) Then
                     SetResultCell RowBase + listIndex, j, FormatResult(ApiTest(SheetName, CStr(Solver)), CStr(Solver), Sheets(SheetName))
