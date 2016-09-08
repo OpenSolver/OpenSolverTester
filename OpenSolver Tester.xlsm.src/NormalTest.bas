@@ -4,7 +4,10 @@ Function NormalTest(sheet As Worksheet, Optional SolveRelaxation As Boolean = Fa
     Dim SolveResult As OpenSolverResult
     SolveResult = OpenSolver.RunOpenSolver(SolveRelaxation, True, sheet:=sheet)
     Application.Calculate
-    If SolveResult = sheet.Range("A9").Value And _
+    If VarType(sheet.Range("A9").Value) = vbError Or _
+       VarType(sheet.Range("A6").Value) = vbError Then
+        NormalTest = Fail
+    ElseIf SolveResult = sheet.Range("A9").Value And _
        sheet.Range("A6").Value = True Then
         NormalTest = Pass
     Else
