@@ -80,6 +80,7 @@ Function ApiTest(SheetName As String, Solver As String) As TestResult
     Case "EscapeSheetName(1)+2-1":      ApiTest = EscapeSheetName.Test(Solver)
     Case "NonLinBinary":                ApiTest = NonLinBinary.Test(Solver)
     Case "Warmstart":                   ApiTest = Warmstart.Test(Solver)
+    Case "NOMADCallback":               ApiTest = NOMADCallback.Test(Solver)
 '    Case "Highlighting":                ApiTest = Highlighting.Test(Solver)
     Case "AutoModel":                   ApiTest = AutoModel.Test(Solver)
     Case Else:                          ApiTest = NA
