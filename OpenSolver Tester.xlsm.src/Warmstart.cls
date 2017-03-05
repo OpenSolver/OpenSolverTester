@@ -26,6 +26,7 @@ Function Test(Solver As String) As TestResult
     
     OpenSolver.SetChosenSolver Solver, sheet:=Me
     OpenSolver.SetSolverParameters "Gurobi", Me.Range("C20:D20"), sheet:=Me
+    OpenSolver.SetTolerance 0, sheet:=Me
     
     LoadOptimalSolution
     
