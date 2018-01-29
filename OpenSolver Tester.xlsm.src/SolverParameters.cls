@@ -175,6 +175,8 @@ Function Test(Solver As String) As TestResult
         Me.Range("R5").Value = "stop_if_feasible"
         Me.Range("S5").Value = 1
         If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.Optimal Then GoTo Failed
+    Case "SolveEngine"
+        If OpenSolver.RunOpenSolver(False, True, sheet:=Me) <> OpenSolverResult.Unbounded Then GoTo Failed
     Case Else
         GoTo Failed
     End Select
