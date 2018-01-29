@@ -23,7 +23,7 @@ Function Test(Solver As String) As TestResult
     End If
     
     OpenSolver.SetQuickSolveParameters Me.Range("O7:P7"), Me
-    OpenSolver.InitializeQuickSolve sheet:=Me
+    OpenSolver.InitializeQuickSolve sheet:=Me, MinimiseUserInteraction:=True
     
     ' Test first set of values
     Dim SolveResult As OpenSolverResult

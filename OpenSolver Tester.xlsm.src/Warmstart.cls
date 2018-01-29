@@ -208,7 +208,7 @@ End Function
 Sub LoadOptimalSolution()
 ' Load the optimal solution in, then reset the iteration limit.
     OpenSolver.SetMaxIterations 999999999, sheet:=Me
-    If OpenSolver.RunOpenSolver(sheet:=Me, minimiseuserinteraction:=True) <> Optimal Or _
+    If OpenSolver.RunOpenSolver(sheet:=Me, MinimiseUserInteraction:=True) <> Optimal Or _
        Me.Range("A6").Value <> True Then
         Err.Raise 1
     End If
@@ -218,7 +218,7 @@ Sub RunTest(ExpectOptimal As Boolean)
 ' Run the solve with the current values in the sheet and see if the warmstart was loaded
     OpenSolver.SetMaxIterations 10, sheet:=Me
     Dim SolveResult As OpenSolver.OpenSolverResult
-    SolveResult = OpenSolver.RunOpenSolver(sheet:=Me, minimiseuserinteraction:=True)
+    SolveResult = OpenSolver.RunOpenSolver(sheet:=Me, MinimiseUserInteraction:=True)
     
     If ExpectOptimal Then
         If SolveResult <> Optimal Or Me.Range("A6").Value <> True Then
