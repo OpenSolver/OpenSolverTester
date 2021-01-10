@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} TestSelector
    ClientHeight    =   5565
    ClientLeft      =   0
    ClientTop       =   -2220
-   ClientWidth     =   7065
+   ClientWidth     =   7068
    OleObjectBlob   =   "TestSelector.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
